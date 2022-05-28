@@ -1,6 +1,10 @@
 {
   "name": "react-word-cloud",
   "version": "0.1.0",
+  "main": "lib/commonjs/components/Container.js",
+  "types": "lib/typescript/components/Container.d.ts",
+  "module": "lib/module/components/Container.js",
+  "source": "src/components/Container.tsx",
   "dependencies": {
     "@react-three/drei": "^9.11.3",
     "@react-three/fiber": "^8.0.19",
@@ -19,11 +23,21 @@
     "@types/three": "^0.140.0",
     "typescript": "^4.4.2"
   },
+  "files": [
+    "src/components",
+    "lib"
+  ],
+  "directories": {
+    "lib": "lib"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "build:commonjs": "babel src/components --out-dir lib/commonjs --extensions '.ts,.tsx' --source-maps",
+    "build:module": "tsc src/components/*.tsx --module es2022 --target es5 --jsx 'react' --sourceMap --skipLibCheck --allowSyntheticDefaultImports --outDir lib/module --moduleResolution node",
+    "build:typescript": "tsc src/components/*.tsx --declaration --emitDeclarationOnly --jsx 'react'  --skipLibCheck --allowSyntheticDefaultImports  --outDir lib/typescript"
   },
   "eslintConfig": {
     "extends": [
