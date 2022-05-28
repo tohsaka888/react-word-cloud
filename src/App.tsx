@@ -1,18 +1,31 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./App.css";
-import { Canvas } from "@react-three/fiber";
-import { TrackballControls } from "@react-three/drei";
-import Cloud from "./components/Cloud";
+import Container from "./components/Container";
+import randomWord from "random-words";
 
 function App() {
+  const count = 10;
+  const [items, setItems] = React.useState<any[]>([]);
+  useEffect(() => {
+    for (let i = 0; i <= count; i++) {
+      for (let j = 0; j < count; j++) {
+        setItems((items) => [...items, randomWord()]);
+      }
+    }
+  }, []);
   return (
-    <div style={{ width: "100%", height: "100vh", background: "black" }}>
-      <Canvas dpr={[1, 2]} camera={{ position: [0, 0, 35], fov: 90 }}>
-        <fog attach="fog" args={["#202025", 0, 80]} />
-        <Cloud count={8} radius={20} />
-        <TrackballControls />
-      </Canvas>
-    </div>
+    <>
+      {items.length > 0 && (
+        <Container
+          width="100%"
+          height="100vh"
+          count={10}
+          radius={25}
+          items={items}
+          style={{ background: "#000" }}
+        />
+      )}
+    </>
   );
 }
 
