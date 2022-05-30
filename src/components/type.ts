@@ -15,5 +15,6 @@ export type Common = {
   type?: 'text' | 'image' | 'other';
   fontSize?: number;
   color?: THREE.ColorRepresentation;
-  clickEvent?: (e: ThreeEvent<MouseEvent>) => void
+  clickEvent?: (e: ThreeEvent<MouseEvent>) => void,
+  font?: string;
 }

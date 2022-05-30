@@ -16,12 +16,13 @@ function Container({
   type = "text",
   fontSize,
   color,
-  clickEvent
+  clickEvent,
+  font
 }: Props) {
   return (
     <div style={{ width, height, ...style }} ref={ref}>
       <Canvas dpr={[1, 2]} camera={{ position: [0, 0, 35], fov: 90 }}>
-        <Context.Provider value={{ items, type, fontSize, color, clickEvent }}>
+        <Context.Provider value={{ items, type, fontSize, color, clickEvent, font }}>
           <Cloud count={count} radius={radius} />
           <TrackballControls />
         </Context.Provider>

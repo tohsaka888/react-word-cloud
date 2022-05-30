@@ -18,7 +18,7 @@ function Word({ type, item, ...props }: Props) {
     quaternionRef.current = camera.quaternion;
     wordRef.current.quaternion.copy(quaternionRef.current);
   });
-  const { fontSize, color, clickEvent } = useContext(Context)!;
+  const { fontSize, color, clickEvent, font } = useContext(Context)!;
 
   return (
     <>
@@ -29,6 +29,7 @@ function Word({ type, item, ...props }: Props) {
           color={new THREE.Color(color || 0xffffff)}
           letterSpacing={-0.05}
           fontSize={fontSize || 2}
+          font={font}
           onClick={(e) => {
             clickEvent ? clickEvent(e) : console.log(item);
           }}

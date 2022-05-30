@@ -1,28 +1,31 @@
 import React, { useEffect } from "react";
 import "./App.css";
 import Container from "./components/Container";
-import randomWord from "random-words";
+import font from './font.ttf'
 
 function App() {
-  const count = 10;
-  const [items, setItems] = React.useState<any[]>([]);
+  const [province, setProvince] = React.useState<string[]>([]);
   useEffect(() => {
-    for (let i = 0; i <= count; i++) {
-      for (let j = 0; j < count; j++) {
-        setItems((items) => [...items, randomWord()]);
-      }
-    }
+    const getProvinceName = async () => {
+      const res = await fetch(
+        `https://lab.isaaclin.cn/nCoV/api/provinceName?lang=zh`
+      );
+      const data = await res.json();
+      setProvince((province) => [...province, ...data.results]);
+    };
+    getProvinceName();
   }, []);
   return (
     <>
-      {items.length > 0 && (
+      {province.length > 0 && (
         <Container
           width="100%"
           height="100vh"
           count={10}
           radius={25}
-          items={items}
+          items={province}
           style={{ background: "#000" }}
+          font={font}
         />
       )}
     </>
