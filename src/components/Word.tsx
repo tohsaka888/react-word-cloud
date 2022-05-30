@@ -18,7 +18,7 @@ function Word({ type, item, ...props }: Props) {
     quaternionRef.current = camera.quaternion;
     wordRef.current.quaternion.copy(quaternionRef.current);
   });
-  const { fontSize, color } = useContext(Context)!;
+  const { fontSize, color, clickEvent } = useContext(Context)!;
 
   return (
     <>
@@ -29,12 +29,32 @@ function Word({ type, item, ...props }: Props) {
           color={new THREE.Color(color || 0xffffff)}
           letterSpacing={-0.05}
           fontSize={fontSize || 2}
+          onClick={(e) => {
+            clickEvent ? clickEvent(e) : console.log(item);
+          }}
         >
           {item}
         </Text>
       )}
-      {type === "image" && <Image {...props} ref={wordRef} url={item} />}
-      {type === "other" && item}
+      {type === "image" && (
+        <Image
+          {...props}
+          ref={wordRef}
+          url={item}
+          onClick={(e) => {
+            clickEvent ? clickEvent(e) : console.log(item);
+          }}
+        />
+      )}
+      {type === "other" && (
+        <mesh
+          onClick={(e) => {
+            clickEvent ? clickEvent(e) : console.log(item);
+          }}
+        >
+          item
+        </mesh>
+      )}
     </>
   );
 }
